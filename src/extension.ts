@@ -170,15 +170,14 @@ function restoreAll(): string {
 }
 
 export default function init(pi: ExtensionAPI) {
-  // Hook into edit/write to auto-checkpoint
-  pi.on('pre_edit', (event: any) => {
-    if (event.path) saveCheckpoint(event.path, 'edit')
-    return event
-  })
-
-  pi.on('pre_write', (event: any) => {
-    if (event.path) saveCheckpoint(event.path, 'write')
-    return event
+  // Hook into tool_call to auto-checkpoint before edit/write
+  pi.on('tool_call', (event: any) => {
+    if (event.toolName === 'edit' && event.input?.path) {
+      saveCheckpoint(event.input.path, 'edit')
+    }
+    if (event.toolName === 'write' && event.input?.path) {
+      saveCheckpoint(event.input.path, 'write')
+    }
   })
 
   // Command
