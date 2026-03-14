@@ -1,0 +1,19 @@
+{
+  "name": "@artale/pi-rewind",
+  "version": "1.0.0",
+  "description": "Checkpoint and rewind for Pi. Auto-snapshot before edits, /rewind to restore with diff preview.",
+  "keywords": ["pi-package"],
+  "license": "MIT",
+  "author": "artale",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arosstale/pi-rewind.git"
+  },
+  "files": ["src/extension.ts"],
+  "pi": {
+    "extensions": ["src/extension.ts"]
+  },
+  "peerDependencies": {
+    "@mariozechner/pi-coding-agent": "*"
+  }
+}
